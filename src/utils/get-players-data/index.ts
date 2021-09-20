@@ -101,6 +101,19 @@ export const getPlayerTotalMatchesPerClub = (player: Player, club) => {
     })
   );
 };
+/**
+ * get player scored goals per club
+ * @param  player player object
+ * @param  club club id
+ * @returns total number of scored goals per club
+ */
+export const getPlayerTotalGoalsPerClub = (player: Player, club) => {
+  return sum(
+    map(player?.nbrGoals, (nbrGoal) => {
+      return nbrGoal?.club === club ? nbrGoal?.nbr : null;
+    })
+  );
+};
 
 /**
  * get player played matches per season
@@ -112,6 +125,20 @@ export const getPlayerTotalMatchesPerSeason = (player: Player, season) => {
   return sum(
     map(player?.nbrMatch, (nbrMatch) => {
       return nbrMatch?.season === season ? nbrMatch?.nbr : null;
+    })
+  );
+};
+
+/**
+ * get player scored goals per season
+ * @param  player player object
+ * @param  club season id
+ * @returns total number of played matches per season
+ */
+export const getPlayerTotalGoalsPerSeason = (player: Player, season) => {
+  return sum(
+    map(player?.nbrGoals, (nbrGoal) => {
+      return nbrGoal?.season === season ? nbrGoal?.nbr : null;
     })
   );
 };
@@ -132,6 +159,26 @@ export const getPlayerTotalMatchesPerSeasonPerclub = (
     map(player?.nbrMatch, (nbrMatch) => {
       return nbrMatch?.season === season && nbrMatch?.club === club
         ? nbrMatch?.nbr
+        : null;
+    })
+  );
+};
+/**
+ * get player scored goals per season/club
+ * @param  player player object
+ * @param  club season id
+ * @param  season season id
+ * @returns total number of scored goals per season
+ */
+export const getPlayerTotalGoalsPerSeasonPerclub = (
+  player: Player,
+  season,
+  club
+) => {
+  return sum(
+    map(player?.nbrGoals, (nbrGoal) => {
+      return nbrGoal?.season === season && nbrGoal?.club === club
+        ? nbrGoal?.nbr
         : null;
     })
   );
