@@ -17,6 +17,7 @@ import {
   AddClubForm,
   Players,
   PlayerStats,
+  PlayerClubHistory,
 } from "./src/components";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -49,7 +50,7 @@ const PlayersStack = () => {
         component={Players}
       />
       <Stack.Screen name="PLAYER STATS" component={PlayerStats} />
-      <Stack.Screen name="ADD NEW PLAYER" component={AddClubForm} />
+      <Stack.Screen name="PLAYER HISTORY" component={PlayerClubHistory} />
     </Stack.Navigator>
   );
 };
