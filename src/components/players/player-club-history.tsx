@@ -1,7 +1,6 @@
 import React from "react";
 import { Button, List, ListItem } from "@ui-kitten/components";
 import { StyleSheet, View } from "react-native";
-
 import { useSelector } from "react-redux";
 import { clubsData } from "../../utils";
 import { getPlayerClubs } from "../../utils/get-players-data";
@@ -12,8 +11,6 @@ export const PlayerClubHistory = (props) => {
   const player = props?.route?.params?.data;
   const clubs = state?.clubs;
   const playerClubs = getPlayerClubs(player, clubs);
-
-  console.log(playerClubs);
 
   const renderItem = ({ item, index }) => (
     <ListItem

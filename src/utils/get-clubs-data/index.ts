@@ -7,12 +7,6 @@ import { Club, Clubs } from "../../types";
  * @returns A transformed club object
  */
 export const transformClubData = (club: Club) => {
-  console.log("in transform ", {
-    id: club?.id,
-    title: club?.name,
-    logo: club?.logo,
-    country: club?.country,
-  });
   return {
     id: club?.id,
     title: club?.name,

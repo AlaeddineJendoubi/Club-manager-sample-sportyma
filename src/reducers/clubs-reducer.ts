@@ -1,5 +1,3 @@
-import { Clubs } from "../types";
-
 const initialState = {
   clubs: [
     {

@@ -1,15 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { StyleSheet, View } from "react-native";
-import {
-  Button,
-  Toggle,
-  ListItem,
-  List,
-  Text,
-  IndexPath,
-  Select,
-  SelectItem,
-} from "@ui-kitten/components";
+import { Toggle, ListItem, List, Text } from "@ui-kitten/components";
 import { LargeImage } from "../image-item";
 import { SelectPlayer } from "./select-player";
 import { getClubDetailsByID } from "../../../utils/get-clubs-data";
@@ -33,7 +24,7 @@ export const ClubDetail = (props) => {
   const onCheckedChange = (isChecked) => {
     setChecked(isChecked);
   };
-  console.log("selectedSeason", selectedSeason);
+
   return (
     <>
       <View style={styles?.topContainer}>
