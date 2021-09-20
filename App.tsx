@@ -11,7 +11,13 @@ import { Provider } from "react-redux";
 import { store } from "./src/store";
 import { ApplicationProvider, Icon, IconRegistry } from "@ui-kitten/components";
 import * as eva from "@eva-design/eva";
-import { Clubs, ClubDetail, AddClubForm, Players } from "./src/components";
+import {
+  Clubs,
+  ClubDetail,
+  AddClubForm,
+  Players,
+  PlayerStats,
+} from "./src/components";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { EvaIconsPack } from "@ui-kitten/eva-icons";
@@ -42,8 +48,8 @@ const PlayersStack = () => {
         name="players"
         component={Players}
       />
-      <Stack.Screen name="CLUB DETAILS" component={ClubDetail} />
-      <Stack.Screen name="ADD NEW CLUB" component={AddClubForm} />
+      <Stack.Screen name="PLAYER STATS" component={PlayerStats} />
+      <Stack.Screen name="ADD NEW PLAYER" component={AddClubForm} />
     </Stack.Navigator>
   );
 };
@@ -60,7 +66,7 @@ const App = () => {
                 tabBarIcon: ({ color, size }) => <Icon name="flag-outline" />,
                 tabBarLabel: "CLUBS",
               }}
-              name="CLUBS LIST"
+              name="CLUBS"
               component={ClubsStack}
             />
             <Tab.Screen
@@ -68,7 +74,7 @@ const App = () => {
                 tabBarIcon: ({ color, size }) => <Icon name="flag-outline" />,
                 tabBarLabel: "PLAYERS",
               }}
-              name="PLAYERS LIST"
+              name="PLAYERS"
               component={PlayersStack}
             />
           </Tab.Navigator>
