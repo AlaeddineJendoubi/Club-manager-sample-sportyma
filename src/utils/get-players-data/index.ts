@@ -1,4 +1,4 @@
-import { map, compact, isNil, filter, sum } from "lodash";
+import { map, compact, isNil, filter, sum, flatten, size } from "lodash";
 import { updatePlayerAction } from "../../actions/players-action";
 import { Players, Player } from "../../types";
 
@@ -134,5 +134,25 @@ export const getPlayerTotalMatchesPerSeasonPerclub = (
         ? nbrMatch?.nbr
         : null;
     })
+  );
+};
+/**
+ * get player clubs
+ * @param  player player object
+ * @param  clubsseason id
+ * @returns an array of player's clubs
+ */
+export const getPlayerClubs = (player, clubs) => {
+  return flatten(
+    compact(
+      map(player?.clubs, (playerClub) => {
+        return compact(
+          map(clubs, (club) => {
+            return playerClub?.club === club?.id ? club : null;
+          })
+        );
+      })
+    ),
+    size
   );
 };
