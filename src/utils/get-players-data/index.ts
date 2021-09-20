@@ -10,8 +10,11 @@ import { Players, Player } from "../../types";
 export const transformPlayerData = (player: Player) => {
   return {
     id: player?.id,
-    title: player?.name,
+    title: player?.name + " " + player?.lastName,
     clubs: player?.clubs,
+    totalGoals: getPlayerTotalGoals(player),
+    nbrMAtch: player?.nbrMatch,
+    nbrGoals: player?.nbrGoals,
   };
 };
 
@@ -68,4 +71,10 @@ export const updatePlayerData = (
   });
   const updatedPlayers = [...playersWithoutUpdatedPlayer, updatedPlayerData];
   dispatch(updatePlayerAction(updatedPlayers));
+};
+
+export const getPlayerTotalGoals = (player) => {
+  return map(player?.nbrGoals, (nbrGoal) => {
+    return nbrGoal?.nbr + nbrGoal?.nbr;
+  });
 };
