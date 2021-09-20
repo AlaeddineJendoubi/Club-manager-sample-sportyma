@@ -1,19 +1,10 @@
 import React, { useState, useEffect } from "react";
-import {
-  IndexPath,
-  Select,
-  SelectItem,
-  Text,
-  Button,
-} from "@ui-kitten/components";
+import { IndexPath, Select, SelectItem, Button } from "@ui-kitten/components";
 import { StyleSheet, View } from "react-native";
-import { truncate } from "lodash";
-import { useDispatch, useSelector } from "react-redux";
-import { changeSelectedSeason } from "../../../actions/seasons-actions";
+import { useDispatch } from "react-redux";
 import {
   createSeaonTitleFromDates,
   resetSelectedSeason,
-  selectedSeasonData,
   updateSelectedSeason,
 } from "../../../utils/get-seasons-data";
 const renderOption = (item) => {
@@ -27,7 +18,6 @@ const renderOption = (item) => {
 
 export const SelectSeason = (props) => {
   const [selectedIndex, setSelectedIndex] = useState(new IndexPath(-1));
-  const [selectedSeason, setSelectedSeason] = useState(0);
   const seasons = props?.state?.seasons?.seasons;
   const dispatch = useDispatch();
 
