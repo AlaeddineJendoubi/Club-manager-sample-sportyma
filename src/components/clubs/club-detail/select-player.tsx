@@ -1,15 +1,7 @@
 import React, { useState, useEffect } from "react";
-import {
-  IndexPath,
-  Select,
-  SelectItem,
-  Text,
-  Button,
-} from "@ui-kitten/components";
+import { IndexPath, Select, SelectItem, Button } from "@ui-kitten/components";
 import { StyleSheet, View } from "react-native";
-
-import { useDispatch, useSelector } from "react-redux";
-
+import { useDispatch } from "react-redux";
 import {
   selectedPlayerData,
   updatePlayerData,
@@ -23,13 +15,12 @@ export const SelectPlayer = (props) => {
   const [selectedPlayer, setSelectedPlayer] = useState("SELECT PLAYER");
   const state = props?.route?.params?.state;
   const players = state?.players;
-
   const dispatch = useDispatch();
-  selectedPlayer;
+
   useEffect(() => {
     setSelectedPlayer(selectedPlayerData(selectedIndex?.row, players));
   });
-  console.log(props.disabled);
+
   return (
     <View style={styles?.filters}>
       <Select
@@ -45,7 +36,13 @@ export const SelectPlayer = (props) => {
         disabled={!props?.disabled}
         style={styles?.resetFilterBtn}
         onPress={() =>
-          updatePlayerData(dispatch, players, selectedPlayer, props?.clubID)
+          updatePlayerData(
+            dispatch,
+            players,
+            selectedPlayer,
+            props?.clubID,
+            state?.seasons?.selectedSeason
+          )
         }
       >
         VALIDATE
