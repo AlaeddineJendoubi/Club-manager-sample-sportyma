@@ -214,3 +214,34 @@ export const getPlayerClubs = (player, clubs) => {
     size
   );
 };
+
+/**
+ * get player  matches per selected filter
+ * @param  player player object
+ * @param  seasonID id
+ * @param  clubID id
+ *
+ * @returns an array of player's clubs
+ */
+export const getPlayerMatchesStats = (player, seasonID, clubID) => {
+  return !isNil(seasonID) && !isNil(clubID)
+    ? getPlayerTotalMatchesPerSeasonPerclub(player, seasonID, clubID)
+    : !isNil(seasonID)
+    ? getPlayerTotalMatchesPerSeason(player, seasonID)
+    : getPlayerTotalMatchesPerClub(player, clubID);
+};
+/**
+ * get playergoals matches per selected filter
+ * @param  player player object
+ * @param  seasonID id
+ * @param  clubID id
+ *
+ * @returns an array of player's clubs
+ */
+export const getPlayerGoalsStats = (player, seasonID, clubID) => {
+  return !isNil(seasonID) && !isNil(clubID)
+    ? getPlayerTotalGoalsPerSeasonPerclub(player, seasonID, clubID)
+    : !isNil(seasonID)
+    ? getPlayerTotalGoalsPerSeason(player, seasonID)
+    : getPlayerTotalGoalsPerClub(player, clubID);
+};
