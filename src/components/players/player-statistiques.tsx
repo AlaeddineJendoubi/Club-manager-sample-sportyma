@@ -47,27 +47,33 @@ export const PlayerStats = (props) => {
   return (
     <>
       <View style={{ ...styles?.middleContainer }}>
-        <Text category="h6"> Name : </Text>
-        <Text status="info" category="h6">
+        <Text category="h7"> Name : </Text>
+        <Text status="info" category="h7">
           {player?.name}
         </Text>
       </View>
       <View style={styles?.middleContainer}>
-        <Text category="h6"> Last Name : </Text>
-        <Text status="info" category="h6">
+        <Text category="h7"> Last Name : </Text>
+        <Text status="info" category="h7">
           {player?.lastName}
         </Text>
       </View>
       <View style={styles?.middleContainer}>
-        <Text category="h6"> Total Matches : </Text>
-        <Text category="h6">{getPlayerTotalMatches(player)}</Text>
+        <Text category="h7"> Total Matches : </Text>
+        <Text category="h7" status="info">
+          {getPlayerTotalMatches(player)}
+        </Text>
       </View>
       <View style={styles?.middleContainer}>
-        <Text category="h6"> Total Goals : </Text>
-        <Text category="h6">{getPlayerTotalGoals(player)}</Text>
+        <Text category="h7"> Total Goals : </Text>
+        <Text status="info" category="h7">
+          {getPlayerTotalGoals(player)}
+        </Text>
       </View>
       <Divider />
-
+      <Text style={styles?.middleContainer} status="warning" category="h6">
+        USE DROP DOWNS TO FILTER
+      </Text>
       <Select
         style={styles?.filterSelect}
         selectedIndex={selectedIndex}
@@ -88,14 +94,14 @@ export const PlayerStats = (props) => {
       </Select>
       <View style={styles?.container}>
         <View style={styles?.middleContainer}>
-          <Text category="h6"> Matches (club|season) : </Text>
-          <Text category="h6">
+          <Text category="h7"> Matches (club|season) : </Text>
+          <Text category="h7" status="info">
             {getPlayerMatchesStats(player, selectedSeasonId, selectedClubId)}
           </Text>
         </View>
         <View style={styles?.middleContainer}>
-          <Text category="h6"> Goals (club|season): </Text>
-          <Text category="h6">
+          <Text category="h7"> Goals (club|season): </Text>
+          <Text category="h7" status="info">
             {getPlayerGoalsStats(player, selectedSeasonId, selectedClubId)}
           </Text>
         </View>
@@ -116,6 +122,7 @@ const styles = StyleSheet.create({
   },
   middleContainer: {
     flexDirection: "row",
+    alignSelf: "center",
   },
   list: {
     width: "100%",
