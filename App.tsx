@@ -9,30 +9,69 @@
 import React from "react";
 import { Provider } from "react-redux";
 import { store } from "./src/store";
-import { ApplicationProvider, IconRegistry } from "@ui-kitten/components";
+import { ApplicationProvider, Icon, IconRegistry } from "@ui-kitten/components";
 import * as eva from "@eva-design/eva";
-import { Clubs, ClubDetail, AddClubForm } from "./src/components";
+import { Clubs, ClubDetail, AddClubForm, Players } from "./src/components";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { EvaIconsPack } from "@ui-kitten/eva-icons";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
+const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
+const ClubsStack = () => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        options={{ headerShown: false }}
+        name="Clubs"
+        component={Clubs}
+      />
+      <Stack.Screen name="CLUB DETAILS" component={ClubDetail} />
+      <Stack.Screen name="ADD NEW CLUB" component={AddClubForm} />
+    </Stack.Navigator>
+  );
+};
+
+const PlayersStack = () => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        options={{ headerShown: false }}
+        name="players"
+        component={Players}
+      />
+      <Stack.Screen name="CLUB DETAILS" component={ClubDetail} />
+      <Stack.Screen name="ADD NEW CLUB" component={AddClubForm} />
+    </Stack.Navigator>
+  );
+};
 const App = () => {
   return (
     <Provider store={store}>
       <IconRegistry icons={EvaIconsPack} />
+
       <ApplicationProvider {...eva} theme={eva.light}>
         <NavigationContainer>
-          <Stack.Navigator>
-            <Stack.Screen
-              options={{ headerShown: false }}
-              name="Home"
-              component={Clubs}
+          <Tab.Navigator>
+            <Tab.Screen
+              options={{
+                tabBarIcon: ({ color, size }) => <Icon name="flag-outline" />,
+                tabBarLabel: "CLUBS",
+              }}
+              name="CLUBS LIST"
+              component={ClubsStack}
             />
-            <Stack.Screen name="CLUB DETAILS" component={ClubDetail} />
-            <Stack.Screen name="ADD NEW CLUB" component={AddClubForm} />
-          </Stack.Navigator>
+            <Tab.Screen
+              options={{
+                tabBarIcon: ({ color, size }) => <Icon name="flag-outline" />,
+                tabBarLabel: "PLAYERS",
+              }}
+              name="PLAYERS LIST"
+              component={PlayersStack}
+            />
+          </Tab.Navigator>
         </NavigationContainer>
       </ApplicationProvider>
     </Provider>

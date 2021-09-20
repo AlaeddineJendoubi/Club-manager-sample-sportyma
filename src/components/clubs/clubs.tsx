@@ -1,6 +1,5 @@
 import React from "react";
-import { List, ListItem } from "@ui-kitten/components";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { Button, List, ListItem } from "@ui-kitten/components";
 import { StyleSheet, View } from "react-native";
 import { ImageItem } from "./image-item";
 import { AddClubTopBar } from "./add-club";
@@ -10,7 +9,7 @@ import { filteredClubsData } from "../../utils";
 
 export const Clubs = (props) => {
   const state = useSelector((state) => state);
-  console.log("filtered returned", filteredClubsData(state));
+
   const renderItem = ({ item, index }) => (
     <ListItem
       title={`${item.title}`}
@@ -23,13 +22,14 @@ export const Clubs = (props) => {
   );
 
   return (
-    <SafeAreaView>
+    <>
       <View style={styles?.container}>
         <AddClubTopBar {...props} state={state} />
         <SelectSeason season={state?.season?.selectedSeason} state={state} />
         <List data={filteredClubsData(state)} renderItem={renderItem} />
       </View>
-    </SafeAreaView>
+      <Button>Players Stats</Button>
+    </>
   );
 };
 

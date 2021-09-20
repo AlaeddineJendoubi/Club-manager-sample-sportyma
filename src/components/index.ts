@@ -1,2 +1,3 @@
 import { AddClubTopBar, Clubs, ClubDetail, AddClubForm } from "./clubs";
-export { AddClubTopBar, Clubs, ClubDetail, AddClubForm };
+import { Players } from "./players";
+export { AddClubTopBar, Clubs, ClubDetail, AddClubForm, Players };
