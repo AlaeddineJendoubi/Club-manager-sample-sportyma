@@ -46,9 +46,8 @@ const initialState = {
       id: "890asd809089ad",
       name: "Neymar",
       lastName: "doe",
-      nbrMatch: [{ season: 3, club: "adade", nbr: 5 }],
-      nbrGoals: [{ season: 1, club: "adade", nbr: 8 }],
-      clubs: [{ season: 3, club: "adade" }],
+      nbrMatch: [],
+      nbrGoals: [],
     },
   ],
 };
