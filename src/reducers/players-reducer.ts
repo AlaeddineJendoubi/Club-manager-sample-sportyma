@@ -4,8 +4,12 @@ const initialState = {
       id: "234321ac",
       name: "Alaeddine",
       lastName: "Jendoubi",
-      nbrMatch: [{ season: 1, club: "adade", nbr: 5 }],
-      nbrGoals: [{ season: 1, club: "adade", nbr: 5 }],
+      nbrMatch: [
+        { season: 1, club: "adade", nbr: 3 },
+        { season: 1, club: "qwe", nbr: 7 },
+        { season: 3, club: "qwe", nbr: 23 },
+      ],
+      nbrGoals: [{ season: 1, club: "sad", nbr: 50 }],
       clubs: [{ season: 1, club: "adade" }],
     },
     {
