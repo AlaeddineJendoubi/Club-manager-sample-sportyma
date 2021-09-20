@@ -1,6 +1,6 @@
 import { addClubAction } from "../../actions/clubs-action";
 import { clubLogosMapping } from "../../utils/mappings";
-
+import cuid from "cuid";
 /**
  * Returns the selected logo id from the logos mapping
  * @param  index The selected item index
@@ -29,7 +29,12 @@ export const submitNewClubForm = (
     alert("PLEASE FILL ALL FIELDS");
   } else {
     dispatch(
-      addClubAction({ ...newClub, logo: logoId, season: { id: seasonIndex } })
+      addClubAction({
+        ...newClub,
+        logo: logoId,
+        id: cuid(),
+        seasons: [{ id: seasonIndex }],
+      })
     );
     alert("Successfully added club");
   }
