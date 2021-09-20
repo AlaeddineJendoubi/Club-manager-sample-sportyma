@@ -14,7 +14,15 @@ export const selectedSeasonData = (selectedIndex, seasons) => {
   try {
     return isNil(seasons[selectedIndex]) ? null : seasons[selectedIndex];
   } catch (error) {
-    "got error while getting seasons data", error;
+    console.log("got error while getting seasons data", error);
+  }
+};
+
+export const selectedClubData = (selectedIndex, clubs) => {
+  try {
+    return isNil(clubs[selectedIndex]) ? null : clubs[selectedIndex];
+  } catch (error) {
+    console.log("got error while getting seasons data", error);
   }
 };
 export const resetSelectedSeason = (dispatch) => {

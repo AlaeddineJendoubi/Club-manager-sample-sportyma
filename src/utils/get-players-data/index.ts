@@ -87,7 +87,18 @@ export const getPlayerTotalGoals = (player) => {
     })
   );
 };
-
+/**
+ * get player total matches count (all seasons)
+ * @param  players players array
+ * @returns total number of scored goals
+ */
+export const getPlayerTotalMatches = (player) => {
+  return sum(
+    map(player?.nbrMatch, (nbrMatch) => {
+      return nbrMatch?.nbr;
+    })
+  );
+};
 /**
  * get player played matches per club
  * @param  player player object
@@ -97,7 +108,7 @@ export const getPlayerTotalGoals = (player) => {
 export const getPlayerTotalMatchesPerClub = (player: Player, club) => {
   return sum(
     map(player?.nbrMatch, (nbrMatch) => {
-      return nbrMatch?.club === club ? nbrMatch?.nbr : null;
+      return nbrMatch?.club === club ? nbrMatch?.nbr : 0;
     })
   );
 };
@@ -110,7 +121,7 @@ export const getPlayerTotalMatchesPerClub = (player: Player, club) => {
 export const getPlayerTotalGoalsPerClub = (player: Player, club) => {
   return sum(
     map(player?.nbrGoals, (nbrGoal) => {
-      return nbrGoal?.club === club ? nbrGoal?.nbr : null;
+      return nbrGoal?.club === club ? nbrGoal?.nbr : 0;
     })
   );
 };
@@ -124,7 +135,7 @@ export const getPlayerTotalGoalsPerClub = (player: Player, club) => {
 export const getPlayerTotalMatchesPerSeason = (player: Player, season) => {
   return sum(
     map(player?.nbrMatch, (nbrMatch) => {
-      return nbrMatch?.season === season ? nbrMatch?.nbr : null;
+      return nbrMatch?.season === season ? nbrMatch?.nbr : 0;
     })
   );
 };
@@ -138,7 +149,7 @@ export const getPlayerTotalMatchesPerSeason = (player: Player, season) => {
 export const getPlayerTotalGoalsPerSeason = (player: Player, season) => {
   return sum(
     map(player?.nbrGoals, (nbrGoal) => {
-      return nbrGoal?.season === season ? nbrGoal?.nbr : null;
+      return nbrGoal?.season === season ? nbrGoal?.nbr : 0;
     })
   );
 };
@@ -159,7 +170,7 @@ export const getPlayerTotalMatchesPerSeasonPerclub = (
     map(player?.nbrMatch, (nbrMatch) => {
       return nbrMatch?.season === season && nbrMatch?.club === club
         ? nbrMatch?.nbr
-        : null;
+        : 0;
     })
   );
 };
@@ -179,7 +190,7 @@ export const getPlayerTotalGoalsPerSeasonPerclub = (
     map(player?.nbrGoals, (nbrGoal) => {
       return nbrGoal?.season === season && nbrGoal?.club === club
         ? nbrGoal?.nbr
-        : null;
+        : 0;
     })
   );
 };
@@ -195,7 +206,7 @@ export const getPlayerClubs = (player, clubs) => {
       map(player?.clubs, (playerClub) => {
         return compact(
           map(clubs, (club) => {
-            return playerClub?.club === club?.id ? club : null;
+            return playerClub?.club === club?.id ? club : 0;
           })
         );
       })
