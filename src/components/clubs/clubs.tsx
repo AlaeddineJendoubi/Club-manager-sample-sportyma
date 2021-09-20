@@ -25,7 +25,7 @@ export const Clubs = (props) => {
     <>
       <View style={styles?.container}>
         <AddClubTopBar {...props} state={state} />
-        <SelectSeason season={state?.season?.selectedSeason} state={state} />
+        <SelectSeason state={state} />
         <List data={filteredClubsData(state)} renderItem={renderItem} />
       </View>
       <Button>Players Stats</Button>
