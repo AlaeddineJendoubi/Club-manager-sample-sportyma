@@ -8,8 +8,10 @@ const renderItemIcon = (props, item) => {
   return (
     <Icon
       {...props}
-      name="activity-outline"
-      onPress={() => props?.navigation.navigate("PLAYER STATS", { data: item })}
+      name="archive"
+      onPress={() =>
+        props?.navigation.navigate("PLAYER HISTORY", { data: item })
+      }
     />
   );
 };
