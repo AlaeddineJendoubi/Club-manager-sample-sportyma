@@ -1,4 +1,4 @@
-import { map, compact, isNil, filter } from "lodash";
+import { map, compact, isNil, filter, sum } from "lodash";
 import { updatePlayerAction } from "../../actions/players-action";
 import { Players, Player } from "../../types";
 
@@ -13,8 +13,10 @@ export const transformPlayerData = (player: Player) => {
     title: player?.name + " " + player?.lastName,
     clubs: player?.clubs,
     totalGoals: getPlayerTotalGoals(player),
-    nbrMAtch: player?.nbrMatch,
+    nbrMatch: player?.nbrMatch,
     nbrGoals: player?.nbrGoals,
+    name: player?.name,
+    lastName: player?.lastName,
   };
 };
 
@@ -73,8 +75,64 @@ export const updatePlayerData = (
   dispatch(updatePlayerAction(updatedPlayers));
 };
 
+/**
+ * get player total goals count (all seasons)
+ * @param  players players array
+ * @returns total number of scored goals
+ */
 export const getPlayerTotalGoals = (player) => {
-  return map(player?.nbrGoals, (nbrGoal) => {
-    return nbrGoal?.nbr + nbrGoal?.nbr;
-  });
+  return sum(
+    map(player?.nbrGoals, (nbrGoal) => {
+      return nbrGoal?.nbr;
+    })
+  );
+};
+
+/**
+ * get player played matches per club
+ * @param  player player object
+ * @param  club club id
+ * @returns total number of played matches per club
+ */
+export const getPlayerTotalMatchesPerClub = (player: Player, club) => {
+  return sum(
+    map(player?.nbrMatch, (nbrMatch) => {
+      return nbrMatch?.club === club ? nbrMatch?.nbr : null;
+    })
+  );
+};
+
+/**
+ * get player played matches per season
+ * @param  player player object
+ * @param  club season id
+ * @returns total number of played matches per season
+ */
+export const getPlayerTotalMatchesPerSeason = (player: Player, season) => {
+  return sum(
+    map(player?.nbrMatch, (nbrMatch) => {
+      return nbrMatch?.season === season ? nbrMatch?.nbr : null;
+    })
+  );
+};
+
+/**
+ * get player played matches per season/club
+ * @param  player player object
+ * @param  club season id
+ * @param  season season id
+ * @returns total number of played matches per season
+ */
+export const getPlayerTotalMatchesPerSeasonPerclub = (
+  player: Player,
+  season,
+  club
+) => {
+  return sum(
+    map(player?.nbrMatch, (nbrMatch) => {
+      return nbrMatch?.season === season && nbrMatch?.club === club
+        ? nbrMatch?.nbr
+        : null;
+    })
+  );
 };
