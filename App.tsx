@@ -18,6 +18,7 @@ import {
   Players,
   PlayerStats,
   PlayerClubHistory,
+  Statistiques,
 } from "./src/components";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -54,6 +55,19 @@ const PlayersStack = () => {
     </Stack.Navigator>
   );
 };
+
+const StatistiquesStack = () => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        options={{ headerShown: false }}
+        name="Statistiques"
+        component={Statistiques}
+      />
+      <Stack.Screen name="PLAYER HISTORY" component={PlayerClubHistory} />
+    </Stack.Navigator>
+  );
+};
 const App = () => {
   return (
     <Provider store={store}>
@@ -77,6 +91,14 @@ const App = () => {
               }}
               name="PLAYERS"
               component={PlayersStack}
+            />
+            <Tab.Screen
+              options={{
+                tabBarIcon: ({ color, size }) => <Icon name="flag-outline" />,
+                tabBarLabel: "STATISTIQUES",
+              }}
+              name="STATISTIQUES"
+              component={StatistiquesStack}
             />
           </Tab.Navigator>
         </NavigationContainer>
