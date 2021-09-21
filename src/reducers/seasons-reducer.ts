@@ -3,18 +3,18 @@ const initialState = {
   seasons: [
     {
       id: 1,
-      startDate: new Date("2021-01-18T00:45:26+0000"),
-      endDate: new Date("2021-04-18T00:45:26+0000"),
+      startDate: 2020,
+      endDate: 2021,
     },
     {
       id: 2,
-      startDate: new Date("2021-04-18T00:45:26+0000"),
-      endDate: new Date("2021-08-18T00:45:26+0000"),
+      startDate: 2019,
+      endDate: 2020,
     },
     {
       id: 3,
-      startDate: new Date("2021-08-18T00:45:26+0000"),
-      endDate: new Date("2021-12-18T00:45:26+0000"),
+      startDate: 2018,
+      endDate: 2019,
     },
   ],
 };
