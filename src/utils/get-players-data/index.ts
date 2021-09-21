@@ -1,6 +1,25 @@
-import { map, compact, isNil, filter, sum, flatten, size } from "lodash";
+import {
+  map,
+  compact,
+  isNil,
+  filter,
+  sum,
+  flatten,
+  size,
+  flattenDeep,
+  merge,
+  uniqWith,
+  uniq,
+  unionBy,
+  isEqual,
+} from "lodash";
 import { updatePlayerAction } from "../../actions/players-action";
-import { Players, Player } from "../../types";
+import { Players, Player, Clubs, Seasons, Club, Season } from "../../types";
+import {
+  clubsData,
+  getClubDetailsByID,
+  getClubPlayers,
+} from "../get-clubs-data";
 
 /**
  * Transforms a player object to item object
@@ -143,7 +162,7 @@ export const getPlayerTotalMatchesPerSeason = (player: Player, season) => {
 /**
  * get player scored goals per season
  * @param  player player object
- * @param  club season id
+ * @param  season season id
  * @returns total number of played matches per season
  */
 export const getPlayerTotalGoalsPerSeason = (player: Player, season) => {
@@ -244,4 +263,98 @@ export const getPlayerGoalsStats = (player, seasonID, clubID) => {
     : !isNil(seasonID)
     ? getPlayerTotalGoalsPerSeason(player, seasonID)
     : getPlayerTotalGoalsPerClub(player, clubID);
+};
+
+export const playersStatsByClubs = (playersData: Players, clubsData: Clubs) => {
+  return flatten(
+    map(playersData, (player: Player) => {
+      const playerClubs = getPlayerClubs(player, clubsData);
+      return map(playerClubs, (playerClub: Club) => {
+        const nbrGoals = getPlayerTotalGoalsPerClub(player, playerClub?.id);
+        const nbrMatchs = getPlayerTotalMatchesPerClub(player, playerClub?.id);
+        return {
+          playerid: player?.id,
+          clubName: playerClub?.name,
+          nbrGoal: nbrGoals,
+          nbrMatch: nbrMatchs,
+        };
+      });
+    })
+  );
+};
+
+export const goalsScoredPerSeason = (players, seasons) => {
+  return flattenDeep(
+    compact(
+      map(seasons, (season) => {
+        return compact(
+          map(players, (player) => {
+            return compact(
+              map(player?.nbrGoals, (playerGoals) => {
+                return season.id === playerGoals?.season
+                  ? {
+                      season: season?.id,
+                      playerName: player?.name,
+                      playerLastName: player?.lastName,
+                      nbrGoals: getPlayerTotalGoalsPerSeason(
+                        player,
+                        season?.id
+                      ),
+                    }
+                  : null;
+              })
+            );
+          })
+        );
+      })
+    )
+  );
+};
+
+export const matchesPlayedPerSeason = (players, seasons) => {
+  return flattenDeep(
+    compact(
+      map(seasons, (season) => {
+        return compact(
+          map(players, (player) => {
+            return compact(
+              map(player?.nbrGoals, (playerMatches) => {
+                return season.id === playerMatches?.season
+                  ? {
+                      season: season?.id,
+                      playerName: player?.name,
+                      playerLastName: player?.lastName,
+                      nbrMatches: getPlayerTotalMatchesPerSeason(
+                        player,
+                        season?.id
+                      ),
+                    }
+                  : null;
+              })
+            );
+          })
+        );
+      })
+    )
+  );
+};
+
+/**
+ * Returns players statistiques based on there season
+ * @param  playersData players array
+ * @param  seasonsData seasons array
+ *
+ * @returns array of number of goals/matches played by a player during a season
+ */
+export const playersStatsBySeason = (
+  playersData: Player,
+  seasonsData: Clubs
+) => {
+  return uniqWith(
+    merge(
+      goalsScoredPerSeason(playersData, seasonsData),
+      matchesPlayedPerSeason(playersData, seasonsData)
+    ),
+    isEqual
+  );
 };

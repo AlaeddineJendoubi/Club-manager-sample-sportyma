@@ -10,7 +10,11 @@ import {
   getPlayerClubs,
   getPlayerMatchesStats,
   getPlayerGoalsStats,
+  playersStatsByClubs,
+  playersStatsBySeason,
 } from "../index";
+
+import { getSeasonDataById } from "../../get-seasons-data";
 import { state } from "../../__mocks__/";
 const stateMock = state;
 
@@ -90,6 +94,56 @@ test("Get player clubs", () => {
       logo: 2,
       name: "CA",
       seasons: [{ id: 1 }, { id: 2 }],
+    },
+  ]);
+});
+
+test("Get season data by ID", () => {
+  expect(getSeasonDataById(stateMock?.seasons?.seasons, 1)).toEqual([
+    { endDate: "2019", id: 1, startDate: "2020" },
+  ]);
+});
+
+test("Get player stats per club", () => {
+  expect(playersStatsByClubs(stateMock?.players, stateMock?.clubs)).toEqual([
+    { playerid: "PlayerID1", clubName: "EST", nbrGoal: 5, nbrMatch: 8 },
+    { playerid: "PlayerID1", clubName: "CA", nbrGoal: 6, nbrMatch: 6 },
+    { playerid: "PlayerID2", clubName: "ESS", nbrGoal: 0, nbrMatch: 0 },
+    { playerid: "PlayerID3", clubName: "EST", nbrGoal: 0, nbrMatch: 0 },
+  ]);
+});
+
+test("Get player stats per club", () => {
+  expect(
+    playersStatsBySeason(stateMock?.players, stateMock?.seasons?.seasons)
+  ).toEqual([
+    {
+      season: 1,
+      playerName: "Blake",
+      playerLastName: "Holmes",
+      nbrGoals: 8,
+      nbrMatches: 3,
+    },
+    {
+      season: 1,
+      playerName: "Baker",
+      playerLastName: "Rubie",
+      nbrGoals: 5,
+      nbrMatches: 5,
+    },
+    {
+      season: 1,
+      playerName: "Alina",
+      playerLastName: "Reed",
+      nbrGoals: 5,
+      nbrMatches: 0,
+    },
+    {
+      season: 2,
+      playerName: "Blake",
+      playerLastName: "Holmes",
+      nbrGoals: 3,
+      nbrMatches: 7,
     },
   ]);
 });

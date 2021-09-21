@@ -1,5 +1,7 @@
+import { map, compact } from "lodash";
 import { truncate, isNil } from "lodash";
 import { changeSelectedSeason } from "../../actions/seasons-actions";
+import { Season, Seasons } from "../../types";
 
 export const createSeaonTitleFromDates = (startDate, endDate) => {
   return !isNil(startDate) || !isNil(endDate)
@@ -34,4 +36,18 @@ export const updateSelectedSeason = (dispatch, selectedIndex, seasons) => {
   return isNil(selectedSeason)
     ? resetSelectedSeason(dispatch)
     : dispatch(changeSelectedSeason(selectedSeason));
+};
+
+/**
+ * Returns season data by season
+ * @param  seasons seasons array
+ * @param  seasonID season id
+ * @returns season data
+ */
+export const getSeasonDataById = (seasons: Seasons, seasonID: String) => {
+  return compact(
+    map(seasons, (season: Season) => {
+      return season?.id === seasonID ? season : null;
+    })
+  );
 };

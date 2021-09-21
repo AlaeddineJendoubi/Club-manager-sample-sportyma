@@ -7,7 +7,7 @@ export interface Player {
   clubs: Clubs[];
 }
 export interface Players {
-  Players: Player[];
+  Players: [Player];
 }
 
 export interface Club {
@@ -18,10 +18,14 @@ export interface Club {
   season: [Season];
 }
 export interface Clubs {
-  Players: Club[];
+  Players: [Club];
 }
 export interface Season {
   id: string;
   startDate: Date;
   endDate: Date;
+}
+
+export interface Seasons {
+  seasons: [Season];
 }
