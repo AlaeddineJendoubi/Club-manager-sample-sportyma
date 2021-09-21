@@ -1,5 +1,5 @@
 import { map, compact, isNil, first, filter, size, flatten } from "lodash";
-import { Club, Clubs } from "../../types";
+import { Club, Clubs, Season } from "../../types";
 
 /**
  * Transforms a club object to item object
@@ -15,7 +15,7 @@ export const transformClubData = (club: Club) => {
   };
 };
 /**
- * Gets clubs data  depending on selected season
+ * Transforms all clubs data to item format
  * @param  clubs clubs array
  * @returns an array of transformed clubs data
  */
@@ -68,21 +68,20 @@ export const getClubDetailsByID = (clubID: number, clubs: Clubs) => {
 };
 
 /**
- * Filters players per selected club
+ * Filters players per selected club per season
  * @param  players array of players
  * @param selectedClub the selected club object
  * @returns an array of filtered players that plays in that club
  */
-export const getClubPlayers = (players, selectedClub: Club, selectedSeason) => {
+export const getClubPlayers = (players, selectedClub: Club, season: Season) => {
   return flatten(
     filter(
       compact(
         map(players, (player) => {
           return compact(
             map(player?.clubs, (club) => {
-              console.log("selected season id", selectedSeason);
               return club?.club === selectedClub?.id &&
-                club?.season === selectedSeason?.id
+                club?.season === season?.id
                 ? player
                 : null;
             })
