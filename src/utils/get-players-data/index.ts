@@ -274,6 +274,8 @@ export const playersStatsByClubs = (playersData: Players, clubsData: Clubs) => {
         const nbrMatchs = getPlayerTotalMatchesPerClub(player, playerClub?.id);
         return {
           playerid: player?.id,
+          playerName: player?.name,
+          playerLastName: player?.lastName,
           clubName: playerClub?.name,
           nbrGoal: nbrGoals,
           nbrMatch: nbrMatchs,
@@ -348,7 +350,7 @@ export const matchesPlayedPerSeason = (players, seasons) => {
  */
 export const playersStatsBySeason = (
   playersData: Player,
-  seasonsData: Clubs
+  seasonsData: Season
 ) => {
   return uniqWith(
     merge(

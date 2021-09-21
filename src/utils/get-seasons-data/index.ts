@@ -5,9 +5,9 @@ import { Season, Seasons } from "../../types";
 
 export const createSeaonTitleFromDates = (startDate, endDate) => {
   return !isNil(startDate) || !isNil(endDate)
-    ? "From : " +
+    ? "From :    " +
         truncate(startDate, { length: 18 }) +
-        "To : " +
+        "   To : " +
         truncate(endDate, { length: 18 })
     : "SEASON DATA IS MISSSING";
 };

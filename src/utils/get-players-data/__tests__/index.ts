@@ -106,10 +106,38 @@ test("Get season data by ID", () => {
 
 test("Get player stats per club", () => {
   expect(playersStatsByClubs(stateMock?.players, stateMock?.clubs)).toEqual([
-    { playerid: "PlayerID1", clubName: "EST", nbrGoal: 5, nbrMatch: 8 },
-    { playerid: "PlayerID1", clubName: "CA", nbrGoal: 6, nbrMatch: 6 },
-    { playerid: "PlayerID2", clubName: "ESS", nbrGoal: 0, nbrMatch: 0 },
-    { playerid: "PlayerID3", clubName: "EST", nbrGoal: 0, nbrMatch: 0 },
+    {
+      playerid: "PlayerID1",
+      playerLastName: "Holmes",
+      playerName: "Blake",
+      clubName: "EST",
+      nbrGoal: 5,
+      nbrMatch: 8,
+    },
+    {
+      playerid: "PlayerID1",
+      playerLastName: "Holmes",
+      playerName: "Blake",
+      clubName: "CA",
+      nbrGoal: 6,
+      nbrMatch: 6,
+    },
+    {
+      playerid: "PlayerID2",
+      playerLastName: "Rubie",
+      playerName: "Baker",
+      clubName: "ESS",
+      nbrGoal: 0,
+      nbrMatch: 0,
+    },
+    {
+      playerid: "PlayerID3",
+      playerLastName: "Reed",
+      playerName: "Alina",
+      clubName: "EST",
+      nbrGoal: 0,
+      nbrMatch: 0,
+    },
   ]);
 });
 
