@@ -4,6 +4,7 @@ export const stateMock = {
       id: "PlayerID1",
       name: "Blake",
       lastName: "Holmes",
+      uniqueId: "sadasd65465465as",
       nbrMatch: [
         { season: 1, club: "ClubID1", nbr: 1 },
         { season: 2, club: "ClubID1", nbr: 7 },
@@ -24,6 +25,7 @@ export const stateMock = {
       id: "PlayerID2",
       name: "Baker",
       lastName: "Rubie",
+      uniqueId: "cktv1djw2000007l47oaa1rc7",
       nbrMatch: [{ season: 1, club: "ClubID1", nbr: 5 }],
       nbrGoals: [{ season: 1, club: "ClubID2", nbr: 5 }],
       clubs: [{ season: 2, club: "ClubID3" }],
@@ -32,6 +34,7 @@ export const stateMock = {
       id: "PlayerID3",
       name: "Alina",
       lastName: "Reed",
+      uniqueId: "cktv1dup3000107l42gjf8u1s",
       nbrMatch: [{ season: 1, club: "ClubID2", nbr: 0 }],
       nbrGoals: [{ season: 1, club: "ClubID3", nbr: 5 }],
       clubs: [{ season: 1, club: "ClubID1" }],

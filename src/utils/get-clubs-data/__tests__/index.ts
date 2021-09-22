@@ -59,6 +59,7 @@ test("Filters players per selected club", () => {
       id: "PlayerID1",
       lastName: "Holmes",
       name: "Blake",
+      uniqueId: "sadasd65465465as",
       nbrGoals: [
         { club: "ClubID1", nbr: 5, season: 1 },
         { club: "ClubID2", nbr: 3, season: 1 },
@@ -76,6 +77,7 @@ test("Filters players per selected club", () => {
       id: "PlayerID3",
       lastName: "Reed",
       name: "Alina",
+      uniqueId: "cktv1dup3000107l42gjf8u1s",
       nbrGoals: [{ club: "ClubID3", nbr: 5, season: 1 }],
       nbrMatch: [{ club: "ClubID2", nbr: 0, season: 1 }],
     },
