@@ -1,6 +1,6 @@
 import { Player, Players } from "../types";
 
-export const addClubAction = (player: Player) => {
+export const addPlayerAction = (player: Player) => {
   return {
     type: "ADD_PLAYER",
     payload: player,
