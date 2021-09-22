@@ -150,6 +150,7 @@ export const Statistiques = (props) => {
       {isNil(isGenerated?.club) || isNil(isGenerated?.season) ? (
         <Button
           appearance="outline"
+          disabled={!checkedClub && !checked}
           onPress={() => {
             type === "SEASON"
               ? setIsGenerated({ ...isGenerated, season: true })
