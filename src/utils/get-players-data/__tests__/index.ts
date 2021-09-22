@@ -15,10 +15,9 @@ import {
 } from "../index";
 
 import { getSeasonDataById } from "../../get-seasons-data";
-import { state } from "../../__mocks__/";
-const stateMock = state;
+import { stateMock } from "../../__mocks__/";
 
-const playerMock = state?.players[0];
+const playerMock = stateMock?.players[0];
 
 test("Get player total matches played", () => {
   expect(getPlayerTotalMatches(playerMock)).toEqual(14);

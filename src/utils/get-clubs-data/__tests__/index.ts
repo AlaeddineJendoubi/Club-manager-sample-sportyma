@@ -5,9 +5,9 @@ import {
   getClubDetailsByID,
   getClubPlayers,
 } from "../index";
-import { state } from "../../__mocks__/";
-const stateMock = state;
-const clubMock = state?.clubs[0];
+import { stateMock } from "../../__mocks__/";
+
+const clubMock = stateMock?.clubs[0];
 
 test("transform club data to item format", () => {
   expect(transformClubData(clubMock)).toEqual({
@@ -34,7 +34,7 @@ test("Filter clubs data depending on selected season", () => {
 });
 
 test("Gets selected club detail by ID", () => {
-  expect(getClubDetailsByID("ClubID1", state?.clubs)).toEqual({
+  expect(getClubDetailsByID("ClubID1", stateMock?.clubs)).toEqual({
     id: "ClubID1",
     name: "EST",
     logo: 1,

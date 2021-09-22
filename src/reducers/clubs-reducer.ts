@@ -1,27 +1,7 @@
+import { stateMock } from "../utils/__mocks__";
+
 const initialState = {
-  clubs: [
-    {
-      id: "adade",
-      name: "EST",
-      logo: 1,
-      country: "Tunisia",
-      seasons: [{ id: 1 }, { id: 2 }],
-    },
-    {
-      id: "adadqwde",
-      name: "CA",
-      logo: 2,
-      country: "Tunisia",
-      seasons: [{ id: 1 }, { id: 2 }],
-    },
-    {
-      id: "adasdaade",
-      name: "ESS",
-      logo: 3,
-      country: "Tunisia",
-      seasons: [{ id: 3 }],
-    },
-  ],
+  clubs: stateMock?.clubs,
 };
 
 export const clubsReducer = (state = initialState?.clubs, action) => {

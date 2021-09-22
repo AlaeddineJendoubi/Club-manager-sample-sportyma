@@ -1,4 +1,4 @@
-export const state = {
+export const stateMock = {
   players: [
     {
       id: "PlayerID1",
