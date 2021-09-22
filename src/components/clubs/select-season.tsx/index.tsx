@@ -31,7 +31,7 @@ export const SelectSeason = (props) => {
         style={styles?.filterSelect}
         selectedIndex={selectedIndex}
         onSelect={(index) => setSelectedIndex(index)}
-        value={"FILTER BY SEASON"}
+        value={"SELECT SEASON"}
       >
         {seasons.map(renderOption)}
       </Select>
