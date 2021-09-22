@@ -1,21 +1,23 @@
 import React, { useState } from "react";
 import { StyleSheet, View } from "react-native";
-
-import { Toggle, List, ListItem, Text, Divider } from "@ui-kitten/components";
-import { useSelector } from "react-redux";
+import { isNil } from "lodash";
+import { Toggle, List, Button, Text, Divider } from "@ui-kitten/components";
+import { useDispatch, useSelector } from "react-redux";
 import { filteredClubsData } from "../../utils";
 import { ImageItem } from "../clubs/image-item";
 import {
   playersStatsByClubs,
   playersStatsBySeason,
 } from "../../utils/get-players-data";
+import { saveGeneratedStats } from "../../utils/submit-stats-data";
+import { isNullLiteral } from "@babel/types";
 
 export const Statistiques = (props) => {
   const renderSeasonsList = ({ item, index }) => {
     return (
       <>
         <View style={{ ...styles?.middleContainer }}>
-          <Text category="h6"> Club name : </Text>
+          <Text category="h6"> Season : </Text>
           <Text status="info" category="h6">
             {item?.season}
           </Text>
@@ -52,19 +54,19 @@ export const Statistiques = (props) => {
     return (
       <>
         <View style={{ ...styles?.middleContainer }}>
-          <Text category="h6"> Season : </Text>
+          <Text category="h6"> Club : </Text>
           <Text status="info" category="h6">
             {item?.clubName}
           </Text>
         </View>
         <View style={{ ...styles?.middleContainer }}>
-          <Text category="h6"> Name : </Text>
+          <Text category="h6"> Player name : </Text>
           <Text status="info" category="h6">
             {item?.playerName}
           </Text>
         </View>
         <View style={styles?.middleContainer}>
-          <Text category="h6"> Last Name : </Text>
+          <Text category="h6"> Player last name : </Text>
           <Text status="info" category="h6">
             {item?.playerLastName}
           </Text>
@@ -89,37 +91,88 @@ export const Statistiques = (props) => {
   const state = useSelector((state) => state);
   const [checked, setChecked] = useState(false);
   const [checkedClub, setCheckedClub] = useState(false);
+  const [isGenerated, setIsGenerated] = useState({ club: null, season: null });
+  const dispatch = useDispatch();
+
   const onCheckedChange = (isChecked) => {
     setChecked(isChecked);
+    setCheckedClub(!isChecked);
   };
   const onCheckeclubdChange = (isChecked) => {
     setCheckedClub(isChecked);
+    setChecked(!isChecked);
   };
-  const playerStats = playersStatsBySeason(
-    state?.players,
-    state?.seasons?.seasons
-  );
 
+  const type =
+    checkedClub === true ? "CLUB" : checked === true ? "SEASON" : null;
+  const players = state?.players;
+  const clubs = state?.clubs;
+  const seasons = state?.seasons?.seasons;
+  const stats = state?.statistiques;
   return (
     <>
-      <Toggle checked={checked} onChange={onCheckedChange}>
-        {`Per season statistiques: ${checked}`}
-      </Toggle>
-      <Toggle checked={checkedClub} onChange={onCheckeclubdChange}>
-        {`Per club statistiques: ${checkedClub}`}
-      </Toggle>
+      <View style={styles?.toggelContainer}>
+        <Toggle
+          checked={checked}
+          onChange={onCheckedChange}
+          style={styles?.toggle}
+        >
+          {`Per season `}
+        </Toggle>
+        <Toggle
+          style={{ ...styles?.toggle, alignSelf: "flex-end" }}
+          checked={checkedClub}
+          onChange={onCheckeclubdChange}
+        >
+          {`Per club `}
+        </Toggle>
+      </View>
       <View style={{ flexDirection: "column" }}>
         <List
           style={{ display: checked ? "flex" : "none" }}
-          data={playersStatsBySeason(state?.players, state?.seasons?.seasons)}
+          data={
+            isGenerated?.season === true
+              ? playersStatsBySeason(players, seasons)
+              : null
+          }
           renderItem={renderSeasonsList}
         />
         <List
           style={{ display: checkedClub ? "flex" : "none" }}
-          data={playersStatsByClubs(state?.players, state?.clubs)}
+          data={
+            isGenerated?.club === true
+              ? playersStatsByClubs(players, clubs)
+              : null
+          }
           renderItem={renderClubsList}
         />
       </View>
+      {isNil(isGenerated?.club) || isNil(isGenerated?.season) ? (
+        <Button
+          appearance="outline"
+          onPress={() => {
+            type === "SEASON"
+              ? setIsGenerated({ ...isGenerated, season: true })
+              : type === "CLUB"
+              ? setIsGenerated({ ...isGenerated, club: true })
+              : null;
+          }}
+        >
+          GENERATE {type} STATS
+        </Button>
+      ) : null}
+      {checked === false && checkedClub === false ? null : (
+        <Button
+          disabled={!isGenerated?.club && !isGenerated?.season}
+          style={styles.button}
+          appearance="outline"
+          onPress={() => {
+            saveGeneratedStats(state, type, dispatch);
+          }}
+        >
+          SAVE STATS
+        </Button>
+      )}
     </>
   );
 };
@@ -128,17 +181,29 @@ const styles = StyleSheet.create({
     height: "100%",
     flexDirection: "column",
   },
+  toggelContainer: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+  },
+  toggle: {
+    margin: 2,
+  },
   topContainer: {
     flexDirection: "column",
-    // alignItems: "center",
     alignContent: "space-around",
   },
   middleContainer: {
     flexDirection: "row",
-    // alignSelf: "center",,
     alignContent: "space-around",
   },
   devider: {
     marginBottom: 20,
+  },
+  button: {
+    margin: 2,
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    width: "100%",
   },
 });
