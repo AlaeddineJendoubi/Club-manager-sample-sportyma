@@ -4,6 +4,7 @@ export interface Player {
   lastName: string;
   nbrMatch: any;
   nbrGoals: any;
+  uniqueId: string;
   clubs: Clubs[];
 }
 export interface Players {

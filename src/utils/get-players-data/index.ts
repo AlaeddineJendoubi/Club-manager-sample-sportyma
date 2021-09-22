@@ -1,3 +1,4 @@
+import cuid from "cuid";
 import {
   map,
   compact,
@@ -36,6 +37,7 @@ export const transformPlayerData = (player: Player) => {
     nbrGoals: player?.nbrGoals,
     name: player?.name,
     lastName: player?.lastName,
+    uniqueId: player?.uniqueId,
   };
 };
 
@@ -86,6 +88,7 @@ export const updatePlayerData = (
   const updatedPlayerData = {
     ...selectedPlayer,
     clubs: [...selectedPlayer?.clubs, ...newAsoociatedClub],
+    uniqueId: cuid(),
   };
   const playersWithoutUpdatedPlayer = filter(players, (player) => {
     return player?.id !== selectedPlayer?.id;
