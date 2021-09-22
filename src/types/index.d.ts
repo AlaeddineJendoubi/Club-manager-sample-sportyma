@@ -29,3 +29,8 @@ export interface Season {
 export interface Seasons {
   seasons: [Season];
 }
+
+export interface Statistiques {
+  club: any;
+  season: any;
+}
