@@ -1,6 +1,14 @@
 # Club manager sample application
 
-A mini club manager test application using react-native (TS), functional component, hooks, UIKitten, Redux
+A mini club manager test application using  
+- **React-native**
+  - [TypeScript]
+  - [Functional components]
+  - [Hooks]
+  - [Redux]
+  - [Unit tests]
+  - [Navigation]
+  - [UIKitten]
 
 ## Installation
 
@@ -13,11 +21,16 @@ pod install
 ```
 To run the application 
 ios :
-```npx react-native run-ios``` 
+```bash
+npx react-native run-ios
+```
 android :
-```npx react-native run-android``` 
+```bash
+npx react-native run-adnroid
+```
 
-## Usage
+
+## Features
 
 *English: 
 - A user can display the clubs list.
